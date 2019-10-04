@@ -4,6 +4,10 @@ networks:
   gitea:
     external: false
 
+volumes:
+  gitea:
+    driver: local
+
 services:
   server:
     image: gitea/gitea:1
@@ -20,9 +24,9 @@ services:
       - gitea
     volumes:
       - gitea:/data
-     ports:
-       - "3000:3000"
-       - "222:22"
+    ports:
+      - "3000:3000"
+      - "222:22"
     depends_on:
       - db
 
@@ -37,4 +41,4 @@ services:
     networks:
       - gitea
     volumes:
-      - ./mysql:/var/lib/mysql
+      - mysql:/var/lib/mysql
